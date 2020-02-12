@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智能车操控</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        function p(x) {
+            $.post("api/" + x, "", function () {
+                console.log(x + " Success")
+            })
+        }
+
+        function op(x) {
+            $("." + x).click(function () {
+                p(x)
+            })
+        }
+
+        $(
+            function () {
+                op("forward");
+                op("backward");
+                op("fast");
+                op("slow");
+                op("pre_lock");
+                op("pre_open");
+                op("back_lock");
+                op("back_open")
+            }
+        )
+
+    </script>
+    <style>
+        .main {
+            margin: auto;
+        }
+        .top{
+            text-align: center;
+            align-content: center;
+        }
+        .steering-wheel{
+            margin: auto;
+        }
+        .steering-wheel div{
+            width: 300px;
+            margin: auto;
+        }
+        button {
+            margin: 10px auto auto;
+            margin-inside: 10px;
+            height: 60px;
+            width: 60px;
+            display: inline-block;
+            outline-style: none;
+            border-style: none;
+            color: #702f7b;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="top">
+        <video src="#" poster="#" width="400px" height="400px" style="background-color: lightblue;margin: auto;">
+
+        </video>
+    </div>
+    <div class="steering-wheel">
+        <div class="change-speed">
+            <button class="fast">高速</button>
+            <button class="slow">低速</button>
+        </div>
+        <div class="lock">
+            <button class="pre_lock">前轮锁</button>
+            <button class="pre_open">前轮开</button>
+            <button class="back_lock">后轮锁</button>
+            <button class="back_open">后轮开</button>
+        </div>
+        <div class="run">
+            <button class="forward">前进</button>
+            <button class="backward">后退</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
