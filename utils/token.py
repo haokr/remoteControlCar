@@ -7,8 +7,8 @@ from db import redis_cli
 DURATION = 60 * 30
 
 class Token():
-    def __init__(self, user_id, car_ip, car_port):
-        self.token = self._gen_token(user_id, car_ip)
+    def __init__(self, user_id, car_ip=='', car_port=''):
+        self.token = self._gen_token(user_id, car_ip, car_port)
         self.user_id = user_id
         self.car_ip = car_ip
         self.car_port = car_port

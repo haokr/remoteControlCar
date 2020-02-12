@@ -8,8 +8,13 @@ from utils.token import Token
 def login():
     car_id = g.user.car.id
     user_id = g.user.id
-    car_ip = redis_cli.get('car:'+car_id)
-    token = Token(user_id, car_ip)
+    car_ip_port = redis_cli.get('car:'+car_id)
+    token = None
+    if not car_ip_port:
+        token = Token(user_id)
+    else:
+        car_ip,car_port = car_ip_port.split(":")
+        token = Token(user_id, car_ip, car_port)
     return token
 
 

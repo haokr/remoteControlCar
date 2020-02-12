@@ -3,6 +3,16 @@ from . import car
 from . import utils
 from db import redis_cli
 
+@car_route('/regist', methods=['POST'])
+def regist():
+    car_id = request.args.get('id')
+    ip_port = request.form.get("ip_port")
+    if not car_id or not ip_port or not utils.judge_legal_ip(ip_port):
+        abort 400
+    redis_cli.set('car:'+car_id, ip_port)
+    return {'status': 'success'}
+
+
 @car.route('/run', methods=['POST'])
 def run():
     msg = None
