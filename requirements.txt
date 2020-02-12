@@ -129,7 +129,7 @@ traitlets==4.3.2
 typed-ast==1.1.0
 typing==3.6.4
 tzlocal==2.0.0
-urllib3==1.24.1
+urllib3==1.24.2
 virtualenv==16.1.0
 virtualenv-clone==0.4.0
 virtualenvwrapper==4.8.2
