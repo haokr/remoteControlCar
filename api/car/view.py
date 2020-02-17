@@ -55,14 +55,12 @@ def run():
 @car.route("/turn", methods=['POST'])
 @token_auth.login_required
 def turn():
-    msg = None
-    isleft = request.form.get('left')
-    if isleft:
-        msg = 'left'
-    else:
-        msg = 'right' 
+    '''转向：1 2 3 4 5
+    '''
+    angle = request.form.get('angle')
+
     if g.car_ip and g.car_port:
-        utils.send(g.car_ip, g.car_port, msg)
+        utils.send(g.car_ip, g.car_port, angle)
         return jsonify({"status": "success"})
     else:
         return jsonify({"status": "fail", "data": 'Car`s ip or port is error.'})
