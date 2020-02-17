@@ -41,10 +41,14 @@ def add():
 def run():
     msg = None
     isbackward = request.form.get('backward')
+    isreset = request.form.get("reset")
     if isbackward:
         msg = 'forward'
     else:
         msg = 'backward'
+    if isreset:
+        msg = 'reset'
+
     if g.car_ip and g.car_port:
         utils.send(g.car_ip, g.car_port, msg)
         return jsonify({"status": "success"})
@@ -58,9 +62,13 @@ def turn():
     '''转向：1 2 3 4 5
     '''
     angle = request.form.get('angle')
+    isreset = request.form.get("reset")
+    msg = angle
+    if isreset:
+        msg = 'reset'
 
     if g.car_ip and g.car_port:
-        utils.send(g.car_ip, g.car_port, angle)
+        utils.send(g.car_ip, g.car_port, msg)
         return jsonify({"status": "success"})
     else:
         return jsonify({"status": "fail", "data": 'Car`s ip or port is error.'})
@@ -75,6 +83,7 @@ def gear():
         msg = 'fast'
     else:
         msg = 'slow'
+
     if g.car_ip and g.car_port:
         utils.send(g.car_ip, g.car_port, msg)
         return jsonify({"status": "success"})
