@@ -27,8 +27,8 @@ def login():
     return jsonify({'status': 'success', 'data': token.get(), 'ísConnected': is_connected})
 
 
-@token_auth.login_required
 @user.route("/logout", methods=["POST"])
+@token_auth.login_required
 def logout():
     token = g.token
     keys = redis_cli.keys(f'token:{token}:*:*')
@@ -47,3 +47,24 @@ def logon():
     db.session.add(user) 
     db.session.commit()
     return jsonify({'status': 'success', 'data': user.id})
+
+
+@user.route('/connect', methods=["POST"])
+@token_auth.login_required
+def connect():
+    user_id = g.user_id
+    keys = redis_cli.keys(f"token:*:{user_id}:*")
+    car_id = keys[0].split(":")[3]
+
+    ip_port = redis_cli.get('car:'+car_id)
+
+    if ip_port:
+        car_ip, car_port = ip_port.split(':')
+        redis_cli.hmset(keys[0], mapping={
+                        'car_ip': car_ip, "car_port": car_port})
+        new_key = keys[0][:52] + car_id
+        redis_cli.rename(keys[0], new_key)
+
+        return jsonify({'status': 'success'})
+    else:
+        return jsonify({'status': 'fail', 'data': 'Not found the car.'})
