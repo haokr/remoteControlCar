@@ -4,6 +4,7 @@ from . import utils
 from db import redis_cli, db
 from auth import token_auth
 from models import Car
+from socket_io import socketio
 
 
 @car.route('/regist', methods=['POST'])
@@ -24,6 +25,8 @@ def regist():
         redis_cli.hmset(keys[0], mapping={'car_ip': car_ip, "car_port": car_port})
         new_key = keys[0][:52] + car_id
         redis_cli.rename(keys[0], new_key)
+        socketio.emit('car_connected',
+                        {'status':'success' ,'data': car_id})
 
     return jsonify({'status': 'success'})
 

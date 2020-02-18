@@ -14,6 +14,7 @@ def login():
     car_ip_port = ''
     user_id = g.user.id
     car_id = ''
+    is_connected = False
     if car:
         car_id = car.id
         car_ip_port = redis_cli.get('car:'+car_id)
@@ -22,7 +23,8 @@ def login():
     else:
         car_ip,car_port = car_ip_port.split(":")
         token = Token(user_id, car_id, car_ip, car_port)
-    return jsonify({'status': 'success', 'data': token.get()})
+        is_connected = True
+    return jsonify({'status': 'success', 'data': token.get(), 'ísConnected': is_connected})
 
 
 @token_auth.login_required
