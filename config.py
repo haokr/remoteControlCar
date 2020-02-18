@@ -1,3 +1,5 @@
+import string
+import random
 
 # dialect+driver://username:password@host:port/database
 DIALECT = 'mysql'
@@ -15,3 +17,5 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 # jsonify 返回数据中文显示
 JSON_AS_ASCII = False
+
+SECRET_KEY = ''.join(random.sample(string.ascii_letters+string.digits, 24)))
