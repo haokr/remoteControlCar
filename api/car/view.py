@@ -5,7 +5,13 @@ from db import redis_cli, db
 from auth import token_auth
 from models import Car
 from socket_io import socketio
+from flask_socketio import emit
 
+
+@socketio.on('connect')
+@token_auth.login_required
+def connect():
+    emit('connect', {'status': 'success'})
 
 @car.route('/regist', methods=['POST'])
 def regist():
