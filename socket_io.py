@@ -1,3 +1,3 @@
-from flask_socketio import Socketio
+from flask_socketio import SocketIO
 
-socketio = Socketio()
+socketio = SocketIO()
