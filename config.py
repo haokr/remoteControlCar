@@ -18,4 +18,4 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 # jsonify 返回数据中文显示
 JSON_AS_ASCII = False
 
-SECRET_KEY = ''.join(random.sample(string.ascii_letters+string.digits, 24)))
+SECRET_KEY = ''.join(random.sample(string.ascii_letters+string.digits, 24))
