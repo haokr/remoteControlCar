@@ -71,11 +71,8 @@ def turn():
     '''转向：1 2 3 4 5
     '''
     angle = request.form.get('angle')
-    isreset = request.form.get("reset")
     msg = angle
-    if isreset:
-        msg = 'reset'
-
+    
     if g.car_ip and g.car_port:
         utils.send(g.car_ip, g.car_port, msg)
         return jsonify({"status": "success"})
