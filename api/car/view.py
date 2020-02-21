@@ -17,13 +17,13 @@ def connect():
 def regist():
     car_id = request.form.get('id')
     ip_port = request.form.get("ip_port")
-    if not car_id or not ip_port or not utils.judge_legal_ip(ip_port):
+    car = Car.query.filter_by(id=car_id).first()
+    if not car or not ip_port or not utils.judge_legal_ip(ip_port):
         abort(400)
     redis_cli.set('car:'+car_id, ip_port)
     redis_cli.expire('car:'+car_id, 60*60*2)
 
     # if the own is online
-    car = Car.query.filter_by(id=car_id).first()
     user_id = car.own_id
     keys = redis_cli.keys(f"token:*:{user_id}:*")
     if keys:
