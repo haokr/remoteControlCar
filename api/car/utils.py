@@ -2,7 +2,7 @@ from socket import socket, AF_INET, SOCK_STREAM
 from db import redis_cli
 import re
 from socket_io import socketio
-
+import json
 
 def judge_legal_ip(one_str):
     ''''' 正则匹配方法 
@@ -18,10 +18,14 @@ def judge_legal_ip(one_str):
 def send(host, port, msg):
     '''向小车发送信息
     '''
-    # s = socket(AF_INET, SOCK_STREAM)
-    # s.connect((host, port))
-    # s.send(msg.encode())
-    # s.close()
-    print(f'[SEND]:{host}:{port}: {msg}')
+    s = socket(AF_INET, SOCK_STREAM)
+    s.connect((host, port))
+    data = {
+        'host': "139.196.94.212",
+        "port": "9030",
+        "msg": msg
+    }
+    s.send(json.dumps(data).encode())
+    s.close()
 
 
