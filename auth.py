@@ -1,5 +1,5 @@
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
-from flask import g
+from flask import g, jsonify
 from models import User
 from utils.token import Token
 
