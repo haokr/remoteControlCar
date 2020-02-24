@@ -3,7 +3,7 @@ from flask import g
 from models import User
 from utils.token import Token
 
-auth = HTTPBasicAuth()
+auth = HTTPBasicAuth(scheme="BasicAuth")
 token_auth = HTTPTokenAuth(scheme="Bearer")
 
 @auth.verify_password
@@ -14,6 +14,12 @@ def verify_password(username, password):
     else:
         g.user = user
         return True
+
+
+@auth.error_handler
+def auth_error():
+    return jsonify({"status": "fail"})
+
 
 @token_auth.verify_token
 def verify_token(token):
