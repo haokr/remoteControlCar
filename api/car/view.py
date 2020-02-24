@@ -59,7 +59,10 @@ def run():
         msg = 'reset'
 
     if g.car_ip and g.car_port:
-        utils.send(g.car_ip, g.car_port, msg)
+        try:
+            utils.send(g.car_ip, g.car_port, msg)
+        except Exception:
+            return jsonify({"status": "fail", "msg": "socket error"}),502
         return jsonify({"status": "success"})
     else:
         return jsonify({"status": "fail", "data": 'Car`s ip or port is error.'})
@@ -74,7 +77,10 @@ def turn():
     msg = angle
     
     if g.car_ip and g.car_port:
-        utils.send(g.car_ip, g.car_port, msg)
+        try:
+            utils.send(g.car_ip, g.car_port, msg)
+        except Exception:
+            return jsonify({"status": "fail", "msg": "socket error"}),502
         return jsonify({"status": "success"})
     else:
         return jsonify({"status": "fail", "data": 'Car`s ip or port is error.'})
@@ -91,7 +97,10 @@ def gear():
         msg = 'slow'
 
     if g.car_ip and g.car_port:
-        utils.send(g.car_ip, g.car_port, msg)
+        try:
+            utils.send(g.car_ip, g.car_port, msg)
+        except Exception:
+            return jsonify({"status": "fail", "msg": "socket error"}),502
         return jsonify({"status": "success"})
     else:
         return jsonify({"status": "fail", "data": 'Car`s ip or port is error.'})
@@ -107,7 +116,10 @@ def lock():
     else:
         msg = 'unlock'
     if g.car_ip and g.car_port:
-        utils.send(g.car_ip, g.car_port, msg)
+        try:
+            utils.send(g.car_ip, g.car_port, msg)
+        except Exception:
+            return jsonify({"status": "fail", "msg": "socket error"}),502
         return jsonify({"status": "success"})
     else:
         return jsonify({"status": "fail", "data": 'Car`s ip or port is error.'})
