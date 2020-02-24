@@ -62,10 +62,10 @@ def run():
         try:
             utils.send(g.car_ip, g.car_port, msg)
         except Exception:
-            return jsonify({"status": "fail", "msg": "socket error"}),502
+            return jsonify({"status": "fail", "msg": "socket error"}),501
         return jsonify({"status": "success"})
     else:
-        return jsonify({"status": "fail", "data": 'Car`s ip or port is error.'})
+        return jsonify({"status": "fail", "msg": 'Car`s ip or port is error.'})
 
 
 @car.route("/turn", methods=['POST'])
@@ -80,10 +80,10 @@ def turn():
         try:
             utils.send(g.car_ip, g.car_port, msg)
         except Exception:
-            return jsonify({"status": "fail", "msg": "socket error"}),502
+            return jsonify({"status": "fail", "msg": "socket error"}),501
         return jsonify({"status": "success"})
     else:
-        return jsonify({"status": "fail", "data": 'Car`s ip or port is error.'})
+        return jsonify({"status": "fail", "msg": 'Car`s ip or port is error.'})
 
 
 @car.route("/gear", methods=['POST'])
@@ -100,10 +100,10 @@ def gear():
         try:
             utils.send(g.car_ip, g.car_port, msg)
         except Exception:
-            return jsonify({"status": "fail", "msg": "socket error"}),502
+            return jsonify({"status": "fail", "msg": "socket error"}),501
         return jsonify({"status": "success"})
     else:
-        return jsonify({"status": "fail", "data": 'Car`s ip or port is error.'})
+        return jsonify({"status": "fail", "msg": 'Car`s ip or port is error.'})
 
 
 @car.route('/lock', methods=["POST"])
@@ -119,7 +119,7 @@ def lock():
         try:
             utils.send(g.car_ip, g.car_port, msg)
         except Exception:
-            return jsonify({"status": "fail", "msg": "socket error"}),502
+            return jsonify({"status": "fail", "msg": "socket error"}),501
         return jsonify({"status": "success"})
     else:
-        return jsonify({"status": "fail", "data": 'Car`s ip or port is error.'})
+        return jsonify({"status": "fail", "msg": 'Car`s ip or port is error.'})
