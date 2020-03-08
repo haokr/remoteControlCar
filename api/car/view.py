@@ -52,9 +52,9 @@ def run():
     isbackward = request.form.get('backward')
     isreset = request.form.get("reset")
     if isbackward:
-        msg = 'forward'
-    else:
         msg = 'backward'
+    else:
+        msg = 'forward'
     if isreset:
         msg = 'reset'
 
