@@ -56,7 +56,7 @@ def run():
     else:
         msg = 'forward'
     if isreset:
-        msg = 'reset'
+        msg = 'reset_run'
 
     if g.car_ip and g.car_port:
         try:
