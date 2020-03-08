@@ -112,9 +112,9 @@ def lock():
     msg = None
     isopen = request.form.get('open')
     if isopen:
-        msg = 'lock'
-    else:
         msg = 'unlock'
+    else:
+        msg = 'lock'
     if g.car_ip and g.car_port:
         try:
             utils.send(g.car_ip, g.car_port, msg)
